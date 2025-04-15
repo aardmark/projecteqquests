@@ -13,9 +13,11 @@ end
 
 function event_say(e)
 	if(e.message:findi("hail")) then
-		e.self:Say("Hail and welcome.  I am sure you have much to do, but could I ask a [favor] of you?");
+		e.self:Say("Hail and welcome.  I am sure you have much to do, but could I ask a [favor] of you? Or maybe you would like to [upgrade] that dagger or lantern?");
 	elseif(e.message:findi("favor")) then
 		e.self:Say("Oh, um, on second thought, never mind.  I should really just do it myself.  Thank you anyway."); 
+	elseif(e.message:findi("upgrade")) then
+		e.self:Say("Of course. I can't believe we still equip new guild members with those items. Hand me your dagger or lantern and I'll give you something better."); 
 	elseif(e.message:findi("enchanted bow")) then
   		e.self:Say("Alas... Another ranger in search of the [Rain Caller]. She is no more");
 	elseif(e.message:findi("rain caller")) then
@@ -40,13 +42,19 @@ function event_trade(e)
 
 	if(item_lib.check_turn_in(e.trade, {item1 = 18778})) then -- Enrollment Letter
 		e.self:Say("Greetings and welcome aboard!  My name's Kinool. Master Enchanter of the Keepers of the Art.  Here is your guild tunic. Make us proud, young pupil! Once you are ready to begin your training please make sure that you see Yuin Starchaser, he can assist you in developing your hunting and gathering skills. Return to me when you have become more experienced in our art, I will be able to further instruct you on how to progress through your early ranks, as well as in some of the various [trades] you will have available to you.");
-		e.other:SummonItem(13593); -- Torn Training Robe*
+		e.other:SummonItem(1357); -- Robe of the Ishva
 		e.other:Ding();
 		e.other:Faction(275,100,0); -- Keepers of the Art
 		e.other:Faction(279,25,0); -- King Tearis Thex
 		e.other:Faction(246,15,0); -- Faydark's Champions
 		e.other:Faction(239,-25,0); -- The Dead
 		e.other:AddEXP(100);
+	elseif(item_lib.check_turn_in(e.trade, {item1 = 9997})) then
+  		e.self:Say("Here you go, this should serve you better.");
+  		e.other:SummonItem(6329); -- Item: Rod of Insidious Glamour
+	elseif(item_lib.check_turn_in(e.trade, {item1 = 9979})) then
+  		e.self:Say("Here you go, this should serve you better.");
+  		e.other:SummonItem(13355); -- Item: Crude Stein
 	elseif(item_lib.check_turn_in(e.trade, {item1 = 12333,item2 = 12334,item3 = 8401, gold = 3000})) then
   		e.self:Say("Fine work!! I now reward you with The Rain Caller.");
 		e.other:Ding();
